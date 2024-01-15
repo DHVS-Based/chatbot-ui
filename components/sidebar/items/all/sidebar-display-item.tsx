@@ -6,6 +6,13 @@ import { ContentType, DataItemType } from "@/types"
 import { useRouter } from "next/navigation"
 import { FC, useContext, useRef, useState } from "react"
 import { SidebarUpdateItem } from "./sidebar-update-item"
+import { IconDots, IconEdit, IconTrash } from "@tabler/icons-react"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu"
 
 interface SidebarItemProps {
   item: DataItemType
@@ -100,6 +107,25 @@ export const SidebarItem: FC<SidebarItemProps> = ({
 
         <div className="ml-3 flex-1 truncate text-sm font-semibold">
           {item.name}
+        </div>
+
+        <div className="ml-2 flex">
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <IconDots />
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent>
+              <DropdownMenuItem className="flex gap-2">
+                <IconEdit size={20} />
+                Editar
+              </DropdownMenuItem>
+              <DropdownMenuItem className="flex gap-2 text-red-500 ">
+                <IconTrash size={20} />
+                Eliminar
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
 
         {/* TODO */}

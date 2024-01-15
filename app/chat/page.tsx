@@ -29,6 +29,7 @@ export default function ChatPage() {
             <Brand theme={theme === "dark" ? "dark" : "light"} />
           </div>
 
+          {/* Start merging in one control */}
           <div className="absolute left-2 top-2">
             <QuickSettings />
           </div>
@@ -36,6 +37,7 @@ export default function ChatPage() {
           <div className="absolute right-2 top-2">
             <ChatSettings />
           </div>
+          {/* Finish merging in one control */}
 
           <div className="flex grow flex-col items-center justify-center" />
 

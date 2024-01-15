@@ -9,11 +9,12 @@ import {
 import { ChatbotUIContext } from "@/context/context"
 import { createWorkspace } from "@/db/workspaces"
 import useHotkey from "@/lib/hooks/use-hotkey"
-import { IconHome, IconPlus } from "@tabler/icons-react"
+import { IconHome, IconPlus, IconSearch } from "@tabler/icons-react"
 import { ChevronsUpDown } from "lucide-react"
 import { FC, useContext, useEffect, useState } from "react"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
+import { WorkspaceSettings } from "../workspace/workspace-settings"
 
 interface WorkspaceSwitcherProps {}
 
@@ -94,25 +95,23 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({}) => {
         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
       </PopoverTrigger>
 
-      <PopoverContent className="p-2">
-        <div className="space-y-2">
-          <Button
-            className="flex w-full items-center space-x-2"
-            size="sm"
-            onClick={handleCreateWorkspace}
-          >
-            <IconPlus />
-            <div className="ml-2">New Workspace</div>
-          </Button>
+      <PopoverContent className="p-0">
+        <div className="flex flex-col self-stretch">
+          <div className="border-b p-1.5">
+            <div className="flex items-center gap-2 px-2 py-1.5">
+              <IconSearch />
 
-          <Input
-            placeholder="Search workspaces..."
-            autoFocus
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-          />
+              <Input
+                className="border-none p-0"
+                placeholder="Search workspaces..."
+                autoFocus
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+              />
+            </div>
+          </div>
 
-          <div className="flex flex-col space-y-1">
+          <div className="flex flex-col border-b p-1.5">
             {workspaces
               .filter(workspace => workspace.is_home)
               .map(workspace => (
@@ -137,7 +136,7 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({}) => {
               .map(workspace => (
                 <Button
                   key={workspace.id}
-                  className="flex justify-start"
+                  className="flex justify-start truncate"
                   variant="ghost"
                   onClick={() => handleSelect(workspace.id)}
                 >
@@ -145,6 +144,22 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({}) => {
                 </Button>
               ))}
           </div>
+        </div>
+
+        <div className="flex flex-col border-b p-1.5">
+          <WorkspaceSettings />
+        </div>
+
+        <div className="flex flex-col border-b p-1.5">
+          <Button
+            className="flex w-full justify-start space-x-2 px-2 py-1.5"
+            size="sm"
+            variant="ghost"
+            onClick={handleCreateWorkspace}
+          >
+            <IconPlus />
+            <div className="ml-2">New Workspace</div>
+          </Button>
         </div>
       </PopoverContent>
     </Popover>

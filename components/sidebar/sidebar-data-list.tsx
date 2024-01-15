@@ -9,7 +9,6 @@ import { cn } from "@/lib/utils"
 import { Tables } from "@/supabase/types"
 import { ContentType, DataItemType, DataListType } from "@/types"
 import { FC, useContext, useEffect, useRef, useState } from "react"
-import { Separator } from "../ui/separator"
 import { AssistantItem } from "./items/assistants/assistant-item"
 import { ChatItem } from "./items/chat/chat-item"
 import { CollectionItem } from "./items/collections/collection-item"
@@ -17,6 +16,13 @@ import { FileItem } from "./items/files/file-item"
 import { Folder } from "./items/folders/folder-item"
 import { PresetItem } from "./items/presets/preset-item"
 import { PromptItem } from "./items/prompts/prompt-item"
+import { FolderList } from "./items/folders/folder-list"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger
+} from "../ui/collapsible"
+import { IconChevronDown, IconChevronRight } from "@tabler/icons-react"
 
 interface SidebarDataListProps {
   contentType: ContentType
@@ -42,6 +48,7 @@ export const SidebarDataList: FC<SidebarDataListProps> = ({
 
   const [isOverflowing, setIsOverflowing] = useState(false)
   const [isDragOver, setIsDragOver] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(true)
 
   const getDataListComponent = (
     contentType: ContentType,
@@ -182,17 +189,61 @@ export const SidebarDataList: FC<SidebarDataListProps> = ({
           <div
             className={`h-full ${
               isOverflowing ? "w-[calc(100%-8px)]" : "w-full"
-            } space-y-2 pt-2 ${isOverflowing ? "mr-2" : ""}`}
+            } space-y-4 pt-2 ${isOverflowing ? "mr-2" : ""}`}
           >
-            {folders.map(folder => (
-              <Folder
-                key={folder.id}
-                folder={folder}
-                onUpdateFolder={updateFolder}
-              >
-                {dataWithFolders
-                  .filter(item => item.folder_id === folder.id)
-                  .map(item => (
+            <FolderList contentType={contentType}>
+              {folders.map(folder => (
+                <Folder
+                  key={folder.id}
+                  folder={folder}
+                  onUpdateFolder={updateFolder}
+                >
+                  {dataWithFolders
+                    .filter(item => item.folder_id === folder.id)
+                    .map(item => (
+                      <div
+                        key={item.id}
+                        draggable
+                        onDragStart={e => handleDragStart(e, item.id)}
+                      >
+                        {getDataListComponent(contentType, item)}
+                      </div>
+                    ))}
+                </Folder>
+              ))}
+            </FolderList>
+
+            <Collapsible
+              className={cn(
+                "flex grow flex-col gap-2",
+                isDragOver && "bg-accent"
+              )}
+              open={isExpanded}
+              onOpenChange={setIsExpanded}
+              onDrop={handleDrop}
+              onDragEnter={handleDragEnter}
+              onDragLeave={handleDragLeave}
+              onDragOver={handleDragOver}
+            >
+              <CollapsibleTrigger asChild>
+                <div className="group inline-flex cursor-pointer items-start gap-2 self-stretch px-2 py-1.5">
+                  {isExpanded ? (
+                    <IconChevronDown stroke={3} />
+                  ) : (
+                    <IconChevronRight stroke={3} />
+                  )}
+
+                  <div className="flex-1">
+                    {contentType.charAt(0).toUpperCase() +
+                      contentType.slice(1, contentType.length - 1)}
+                    s
+                  </div>
+                </div>
+              </CollapsibleTrigger>
+
+              <CollapsibleContent>
+                {dataWithoutFolders.map(item => {
+                  return (
                     <div
                       key={item.id}
                       draggable
@@ -200,31 +251,10 @@ export const SidebarDataList: FC<SidebarDataListProps> = ({
                     >
                       {getDataListComponent(contentType, item)}
                     </div>
-                  ))}
-              </Folder>
-            ))}
-
-            {folders.length > 0 && <Separator />}
-
-            <div
-              className={cn("flex grow flex-col", isDragOver && "bg-accent")}
-              onDrop={handleDrop}
-              onDragEnter={handleDragEnter}
-              onDragLeave={handleDragLeave}
-              onDragOver={handleDragOver}
-            >
-              {dataWithoutFolders.map(item => {
-                return (
-                  <div
-                    key={item.id}
-                    draggable
-                    onDragStart={e => handleDragStart(e, item.id)}
-                  >
-                    {getDataListComponent(contentType, item)}
-                  </div>
-                )
-              })}
-            </div>
+                  )
+                })}
+              </CollapsibleContent>
+            </Collapsible>
           </div>
         )}
       </div>

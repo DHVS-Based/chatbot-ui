@@ -45,7 +45,7 @@ import { uploadAssistantImage } from "@/db/storage/assistant-images"
 import { Tables, TablesUpdate } from "@/supabase/types"
 import { ContentType, DataItemType } from "@/types"
 import { FC, useContext, useEffect, useRef, useState } from "react"
-import { SidebarDeleteItem } from "./sidebar-delete-item"
+import { ScrollArea } from "@/components/ui/scroll-area"
 
 interface SidebarUpdateItemProps {
   item: DataItemType
@@ -343,29 +343,29 @@ export const SidebarUpdateItem: FC<SidebarUpdateItemProps> = ({
           </DialogTitle>
         </DialogHeader>
 
-        {/* TODO */}
-        {/* <div className="absolute right-4 top-4">
-          <ShareMenu item={item} contentType={contentType} />
-        </div> */}
+        <ScrollArea className=" max-h-[60vh] overflow-auto">
+          {/* TODO */}
+          {/* <div className="absolute right-4 top-4">
+            <ShareMenu item={item} contentType={contentType} />
+          </div> */}
 
-        <div className="space-y-3">
-          {workspaces.length > 1 && (
-            <div className="space-y-1">
-              <Label>Assigned Workspaces</Label>
+          <div className="space-y-3">
+            {workspaces.length > 1 && (
+              <div className="space-y-1">
+                <Label>Assigned Workspaces</Label>
 
-              <AssignWorkspaces
-                selectedWorkspaces={selectedWorkspaces}
-                onSelectWorkspace={handleSelectWorkspace}
-              />
-            </div>
-          )}
+                <AssignWorkspaces
+                  selectedWorkspaces={selectedWorkspaces}
+                  onSelectWorkspace={handleSelectWorkspace}
+                />
+              </div>
+            )}
 
-          {renderInputs()}
-        </div>
+            {renderInputs()}
+          </div>
+        </ScrollArea>
 
         <DialogFooter className="mt-2 flex justify-between">
-          <SidebarDeleteItem item={item} contentType={contentType} />
-
           <div className="flex grow justify-end space-x-2">
             <Button variant="outline" onClick={() => setIsOpen(false)}>
               Cancel

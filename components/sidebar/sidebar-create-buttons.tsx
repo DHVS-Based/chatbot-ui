@@ -1,9 +1,7 @@
 import { useChatHandler } from "@/components/chat/chat-hooks/use-chat-handler"
-import { ChatbotUIContext } from "@/context/context"
-import { createFolder } from "@/db/folders"
 import { ContentType } from "@/types"
-import { IconFolderPlus, IconPlus } from "@tabler/icons-react"
-import { FC, useContext, useState } from "react"
+import { IconPlus } from "@tabler/icons-react"
+import { FC, useState } from "react"
 import { Button } from "../ui/button"
 import { CreateAssistant } from "./items/assistants/create-assistant"
 import { CreateCollection } from "./items/collections/create-collection"
@@ -18,8 +16,6 @@ interface SidebarCreateButtonsProps {
 export const SidebarCreateButtons: FC<SidebarCreateButtonsProps> = ({
   contentType
 }) => {
-  const { profile, selectedWorkspace, folders, setFolders } =
-    useContext(ChatbotUIContext)
   const { handleNewChat } = useChatHandler()
 
   const [isCreatingPrompt, setIsCreatingPrompt] = useState(false)
@@ -27,20 +23,6 @@ export const SidebarCreateButtons: FC<SidebarCreateButtonsProps> = ({
   const [isCreatingFile, setIsCreatingFile] = useState(false)
   const [isCreatingCollection, setIsCreatingCollection] = useState(false)
   const [isCreatingAssistant, setIsCreatingAssistant] = useState(false)
-
-  const handleCreateFolder = async () => {
-    if (!profile) return
-    if (!selectedWorkspace) return
-
-    const createdFolder = await createFolder({
-      user_id: profile.user_id,
-      workspace_id: selectedWorkspace.id,
-      name: "New Folder",
-      description: "",
-      type: contentType
-    })
-    setFolders([...folders, createdFolder])
-  }
 
   const getCreateFunction = () => {
     switch (contentType) {
@@ -86,10 +68,6 @@ export const SidebarCreateButtons: FC<SidebarCreateButtonsProps> = ({
         New{" "}
         {contentType.charAt(0).toUpperCase() +
           contentType.slice(1, contentType.length - 1)}
-      </Button>
-
-      <Button className="h-[36px] w-[36px] p-1" onClick={handleCreateFolder}>
-        <IconFolderPlus size={20} />
       </Button>
 
       {isCreatingPrompt && (

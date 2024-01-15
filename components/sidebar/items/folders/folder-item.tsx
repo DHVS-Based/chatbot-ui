@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 import { Tables } from "@/supabase/types"
-import { IconChevronDown, IconChevronRight } from "@tabler/icons-react"
+import { IconFolder, IconFolderOpen } from "@tabler/icons-react"
 import { FC, useRef, useState } from "react"
 import { DeleteFolder } from "./delete-folder"
 import { UpdateFolder } from "./update-folder"
@@ -79,9 +79,9 @@ export const Folder: FC<FolderProps> = ({
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center space-x-2">
             {isExpanded ? (
-              <IconChevronDown stroke={3} />
+              <IconFolderOpen stroke={2} />
             ) : (
-              <IconChevronRight stroke={3} />
+              <IconFolder stroke={2} />
             )}
 
             <div>{folder.name}</div>
@@ -104,7 +104,9 @@ export const Folder: FC<FolderProps> = ({
       </div>
 
       {isExpanded && (
-        <div className="ml-5 mt-2 space-y-2 border-l-2 pl-4">{children}</div>
+        <div className="ml-5 mt-2 pl-2">
+          <div className="space-y-2 border-l-2">{children}</div>
+        </div>
       )}
     </div>
   )

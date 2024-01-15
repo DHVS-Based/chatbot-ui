@@ -104,16 +104,14 @@ export const WorkspaceSettings: FC<WorkspaceSettingsProps> = ({}) => {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <WithTooltip
-          display={<div>Workspace Settings</div>}
-          trigger={
-            <IconSettings
-              className="ml-3 cursor-pointer pr-[5px] hover:opacity-50"
-              size={32}
-              onClick={() => setIsOpen(true)}
-            />
-          }
-        />
+        <Button
+          className="flex-1 justify-start gap-2 truncate px-2 py-1.5"
+          variant="ghost"
+          onClick={() => setIsOpen(true)}
+        >
+          <IconSettings className="cursor-pointer" />
+          {selectedWorkspace?.name} Settings
+        </Button>
       </SheetTrigger>
 
       <SheetContent

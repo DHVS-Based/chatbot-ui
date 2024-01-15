@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"
 import {
   IconCirclePlus,
   IconPlayerStopFilled,
-  IconSend
+  IconArrowUp
 } from "@tabler/icons-react"
 import { FC, useContext, useEffect, useRef } from "react"
 import { Input } from "../ui/input"
@@ -122,10 +122,10 @@ export const ChatInput: FC<ChatInputProps> = ({}) => {
               size={30}
             />
           ) : (
-            <IconSend
+            <IconArrowUp
               className={cn(
                 "bg-primary text-secondary rounded p-1",
-                !userInput && "cursor-not-allowed opacity-50"
+                !userInput && "cursor-not-allowed opacity-10"
               )}
               onClick={() => {
                 if (!userInput) return
