@@ -11,10 +11,11 @@ import { createWorkspace } from "@/db/workspaces"
 import useHotkey from "@/lib/hooks/use-hotkey"
 import { IconHome, IconPlus, IconSearch } from "@tabler/icons-react"
 import { ChevronsUpDown } from "lucide-react"
-import { FC, useContext, useEffect, useState } from "react"
+import { FC, useContext, useEffect, useRef, useState } from "react"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import { WorkspaceSettings } from "../workspace/workspace-settings"
+import { Avatar, AvatarFallback } from "../ui/avatar"
 
 interface WorkspaceSwitcherProps {}
 
@@ -24,6 +25,8 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({}) => {
   const { workspaces, selectedWorkspace, setSelectedWorkspace, setWorkspaces } =
     useContext(ChatbotUIContext)
   const { handleNewChat } = useChatHandler()
+
+  const triggerRef = useRef<HTMLButtonElement>(null)
 
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState("")
@@ -82,11 +85,22 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({}) => {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
         className="border-input flex h-[36px]
-        w-full cursor-pointer items-center justify-between rounded-md border px-2 py-1 hover:opacity-50"
+        w-full cursor-pointer items-center justify-between rounded-md border px-2 py-1 hover:opacity-90"
+        ref={triggerRef}
       >
-        <div className="flex items-center truncate">
-          {selectedWorkspace?.is_home && (
-            <IconHome className="mb-0.5 mr-2" size={16} />
+        <div className="flex items-center gap-2 truncate">
+          {selectedWorkspace?.is_home ? (
+            <Avatar className="h-6 w-6">
+              <AvatarFallback className="text-base">
+                <IconHome size={16} />
+              </AvatarFallback>
+            </Avatar>
+          ) : (
+            <Avatar className="h-6 w-6">
+              <AvatarFallback className="text-sm">
+                {getWorkspaceName(value)?.charAt(0).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
           )}
 
           {getWorkspaceName(value) || "Select workspace..."}
@@ -95,14 +109,17 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({}) => {
         <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
       </PopoverTrigger>
 
-      <PopoverContent className="p-0">
+      <PopoverContent
+        className="p-0"
+        style={{ width: triggerRef.current?.offsetWidth }}
+      >
         <div className="flex flex-col self-stretch">
           <div className="border-b p-1.5">
-            <div className="flex items-center gap-2 px-2 py-1.5">
+            <div className="flex items-center gap-2 px-2">
               <IconSearch />
 
               <Input
-                className="border-none p-0"
+                className="border-none px-0 py-1.5 text-base font-normal"
                 placeholder="Search workspaces..."
                 autoFocus
                 value={search}
@@ -117,12 +134,13 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({}) => {
               .map(workspace => (
                 <Button
                   key={workspace.id}
-                  className="flex items-center justify-start"
+                  className="flex items-center justify-start gap-2 px-2 py-1.5 text-base font-normal"
                   variant="ghost"
                   onClick={() => handleSelect(workspace.id)}
                 >
-                  <IconHome className="mr-2" size={20} />
-                  <div className="text-lg">{workspace.name}</div>
+                  <IconHome />
+
+                  <div className="text-base font-normal">{workspace.name}</div>
                 </Button>
               ))}
 
@@ -136,11 +154,16 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({}) => {
               .map(workspace => (
                 <Button
                   key={workspace.id}
-                  className="flex justify-start truncate"
+                  className="flex justify-start gap-2 truncate px-2 py-1.5 text-base font-normal"
                   variant="ghost"
                   onClick={() => handleSelect(workspace.id)}
                 >
-                  <div className="text-lg">{workspace.name}</div>
+                  <Avatar className="h-6 w-6">
+                    <AvatarFallback className="text-base">
+                      {workspace.name.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="text-base font-normal">{workspace.name}</div>
                 </Button>
               ))}
           </div>
@@ -152,8 +175,7 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({}) => {
 
         <div className="flex flex-col border-b p-1.5">
           <Button
-            className="flex w-full justify-start space-x-2 px-2 py-1.5"
-            size="sm"
+            className="flex w-full justify-start space-x-2 px-2 py-1.5 text-base font-normal"
             variant="ghost"
             onClick={handleCreateWorkspace}
           >

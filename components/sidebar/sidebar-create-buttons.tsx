@@ -63,7 +63,11 @@ export const SidebarCreateButtons: FC<SidebarCreateButtonsProps> = ({
 
   return (
     <div className="flex w-full space-x-2">
-      <Button className="flex h-[36px] grow" onClick={getCreateFunction()}>
+      <Button
+        className="flex h-[36px] grow"
+        variant="outline"
+        onClick={getCreateFunction()}
+      >
         <IconPlus className="mr-1" size={20} />
         New{" "}
         {contentType.charAt(0).toUpperCase() +

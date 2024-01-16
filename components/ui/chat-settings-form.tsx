@@ -20,6 +20,7 @@ import {
 import { Slider } from "./slider"
 import { TextareaAutosize } from "./textarea-autosize"
 import { WithTooltip } from "./with-tooltip"
+import { QuickSettings } from "../chat/quick-settings"
 
 interface ChatSettingsFormProps {
   chatSettings: ChatSettings
@@ -40,6 +41,12 @@ export const ChatSettingsForm: FC<ChatSettingsFormProps> = ({
 
   return (
     <div className="space-y-3">
+      <div className="space-y-1">
+        <Label>Preset</Label>
+
+        <QuickSettings />
+      </div>
+
       <div className="space-y-1">
         <Label>Model</Label>
 

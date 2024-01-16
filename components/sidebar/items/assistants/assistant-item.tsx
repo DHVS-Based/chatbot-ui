@@ -52,13 +52,13 @@ export const AssistantItem: FC<AssistantItemProps> = ({ assistant }) => {
             className="rounded"
             src={imageLink}
             alt={assistant.name}
-            width={30}
-            height={30}
+            width={24}
+            height={24}
           />
         ) : (
           <IconRobotFace
             className="bg-primary text-secondary border-primary rounded border-[1px] p-1"
-            size={30}
+            size={24}
           />
         )
       }

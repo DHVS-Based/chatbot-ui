@@ -174,21 +174,6 @@ export const ChatHelp: FC<ChatHelpProps> = ({}) => {
         </DropdownMenuItem>
 
         <DropdownMenuItem className="flex justify-between">
-          <div>Open Presets</div>
-          <div className="flex opacity-60">
-            <div className="min-w-[30px] rounded border-[1px] p-1 text-center">
-              ⌘
-            </div>
-            <div className="min-w-[30px] rounded border-[1px] p-1 text-center">
-              Shift
-            </div>
-            <div className="min-w-[30px] rounded border-[1px] p-1 text-center">
-              P
-            </div>
-          </div>
-        </DropdownMenuItem>
-
-        <DropdownMenuItem className="flex justify-between">
           <div>Toggle Sidebar</div>
           <div className="flex opacity-60">
             <div className="min-w-[30px] rounded border-[1px] p-1 text-center">

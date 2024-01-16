@@ -48,20 +48,18 @@ export const ChatSettings: FC<ChatSettingsProps> = ({}) => {
       <PopoverTrigger>
         <Button
           ref={buttonRef}
-          className="flex items-center space-x-2"
-          variant="ghost"
+          className="flex items-center gap-2 bg-transparent px-3"
+          variant="outline"
         >
-          <div className="text-xl">
-            {fullModel?.modelName || chatSettings.model}
-          </div>
+          {fullModel?.modelName || chatSettings.model}
 
-          <IconAdjustmentsHorizontal size={28} />
+          <IconAdjustmentsHorizontal />
         </Button>
       </PopoverTrigger>
 
       <PopoverContent
         className="bg-background border-input relative flex max-h-[calc(100vh-60px)] w-[300px] flex-col space-y-4 overflow-auto rounded-lg border-2 p-6 sm:w-[400px] md:w-[500px] lg:w-[600px] dark:border-none"
-        align="end"
+        align="center"
       >
         <ChatSettingsForm
           chatSettings={chatSettings}

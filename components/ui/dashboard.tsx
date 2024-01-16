@@ -7,7 +7,6 @@ import { Tabs } from "@/components/ui/tabs"
 import useHotkey from "@/lib/hooks/use-hotkey"
 import { cn } from "@/lib/utils"
 import { ContentType } from "@/types"
-import { IconChevronCompactRight } from "@tabler/icons-react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { FC, useState } from "react"
 import { useSelectFileHandler } from "../chat/chat-hooks/use-select-file-handler"
@@ -36,6 +35,7 @@ export const Dashboard: FC<DashboardProps> = ({ children }) => {
     localStorage.getItem("showSidebar") === "true"
   )
   const [isDragging, setIsDragging] = useState(false)
+  const [isHovering, setIsHovering] = useState(false)
 
   const onFileDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault()
@@ -82,8 +82,32 @@ export const Dashboard: FC<DashboardProps> = ({ children }) => {
         variant="ghost"
         size="icon"
         onClick={handleToggleSidebar}
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
       >
-        <IconChevronCompactRight size={24} />
+        <div
+          className="flex h-6 w-6 flex-col items-center transition-all delay-75"
+          style={{
+            opacity: isHovering ? 1 : 0.25
+          }}
+        >
+          <div
+            className="bg-accent-foreground h-3 w-1 rounded-full transition-all delay-75"
+            style={{
+              transform: `translateY(0.1rem) ${
+                isHovering ? "rotate(-15deg)" : "rotate(0deg)"
+              }`
+            }}
+          />
+          <div
+            className="bg-accent-foreground h-3 w-1 rounded-full transition-all delay-75"
+            style={{
+              transform: `translateY(-0.1rem) ${
+                isHovering ? "rotate(15deg)" : "rotate(0deg)"
+              }`
+            }}
+          />
+        </div>
       </Button>
 
       <div

@@ -18,7 +18,6 @@ import {
 } from "../ui/sheet"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs"
 import { TextareaAutosize } from "../ui/textarea-autosize"
-import { WithTooltip } from "../ui/with-tooltip"
 import { DeleteWorkspace } from "./delete-workspace"
 
 interface WorkspaceSettingsProps {}
@@ -105,7 +104,7 @@ export const WorkspaceSettings: FC<WorkspaceSettingsProps> = ({}) => {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <Button
-          className="flex-1 justify-start gap-2 truncate px-2 py-1.5"
+          className="flex-1 justify-start gap-2 truncate px-2 py-1.5 text-base font-normal"
           variant="ghost"
           onClick={() => setIsOpen(true)}
         >

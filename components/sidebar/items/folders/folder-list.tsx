@@ -3,6 +3,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger
 } from "@/components/ui/collapsible"
+import { Button } from "@/components/ui/button"
 import { ChatbotUIContext } from "@/context/context"
 import { createFolder } from "@/db/folders"
 import { ContentType } from "@/types"
@@ -24,7 +25,7 @@ export const FolderList: FC<FolderListProps> = ({ contentType, children }) => {
 
   const [isExpanded, setIsExpanded] = useState(false)
 
-  const handleCreateFolder = async (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleCreateFolder = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
 
     if (!profile) return
@@ -42,17 +43,13 @@ export const FolderList: FC<FolderListProps> = ({ contentType, children }) => {
 
   return (
     <Collapsible
-      className="flex flex-col self-stretch"
+      className="flex flex-col gap-2 self-stretch"
       open={isExpanded}
       onOpenChange={setIsExpanded}
     >
       <CollapsibleTrigger asChild>
-        <div className="group inline-flex cursor-pointer items-start gap-2 self-stretch px-2 py-1.5">
-          {isExpanded ? (
-            <IconChevronDown stroke={3} />
-          ) : (
-            <IconChevronRight stroke={3} />
-          )}
+        <div className="group relative inline-flex cursor-pointer items-center gap-2 self-stretch px-2 py-1.5">
+          {isExpanded ? <IconChevronDown /> : <IconChevronRight />}
 
           <div className="flex-1">
             {contentType.charAt(0).toUpperCase() +
@@ -60,13 +57,17 @@ export const FolderList: FC<FolderListProps> = ({ contentType, children }) => {
             Folders
           </div>
 
-          <div className="inline-flex" onClick={handleCreateFolder}>
-            <IconPlus stroke={2} />
-          </div>
+          <Button
+            className="h-6 w-6 p-0"
+            variant="ghost"
+            onClick={handleCreateFolder}
+          >
+            <IconPlus />
+          </Button>
         </div>
       </CollapsibleTrigger>
 
-      <CollapsibleContent className="flex flex-col gap-2 self-stretch">
+      <CollapsibleContent className="flex max-h-60 flex-col gap-2 self-stretch overflow-auto">
         {children}
       </CollapsibleContent>
     </Collapsible>

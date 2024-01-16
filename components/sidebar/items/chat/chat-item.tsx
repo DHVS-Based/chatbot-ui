@@ -48,7 +48,7 @@ export const ChatItem: FC<ChatItemProps> = ({ chat }) => {
     <div
       ref={itemRef}
       className={cn(
-        "hover:bg-accent focus:bg-accent flex w-full cursor-pointer items-center rounded p-2 hover:opacity-50 focus:outline-none",
+        "hover:bg-accent/50 focus:bg-accent flex w-full cursor-pointer items-center rounded-md p-2 focus:outline-none",
         isActive && "bg-accent"
       )}
       tabIndex={0}
@@ -61,20 +61,20 @@ export const ChatItem: FC<ChatItemProps> = ({ chat }) => {
             className="rounded"
             src={assistantImage}
             alt="Assistant image"
-            width={30}
-            height={30}
+            width={24}
+            height={24}
           />
         ) : (
           <IconRobotFace
             className="bg-primary text-secondary border-primary rounded border-[1px] p-1"
-            size={30}
+            size={24}
           />
         )
       ) : (
-        <ModelIcon modelId={MODEL_DATA?.modelId} height={30} width={30} />
+        <ModelIcon modelId={MODEL_DATA?.modelId} height={24} width={24} />
       )}
 
-      <div className="ml-3 flex-1 truncate text-sm font-semibold">
+      <div className="ml-3 flex-1 truncate text-base font-normal">
         {chat.name}
       </div>
 

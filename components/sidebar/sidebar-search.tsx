@@ -1,6 +1,7 @@
 import { ContentType } from "@/types"
 import { FC } from "react"
 import { Input } from "../ui/input"
+import { IconSearch } from "@tabler/icons-react"
 
 interface SidebarSearchProps {
   contentType: ContentType
@@ -14,10 +15,15 @@ export const SidebarSearch: FC<SidebarSearchProps> = ({
   setSearchTerm
 }) => {
   return (
-    <Input
-      placeholder={`Search ${contentType}...`}
-      value={searchTerm}
-      onChange={e => setSearchTerm(e.target.value)}
-    />
+    <div className="border-input flex h-9 items-center gap-2 overflow-hidden rounded-md border px-2">
+      <IconSearch />
+
+      <Input
+        className="border-none p-0 text-base font-normal"
+        placeholder={`Search ${contentType}...`}
+        value={searchTerm}
+        onChange={e => setSearchTerm(e.target.value)}
+      />
+    </div>
   )
 }

@@ -174,7 +174,7 @@ export const SidebarDataList: FC<SidebarDataListProps> = ({
     <>
       <div
         ref={divRef}
-        className="mt-2 flex flex-col overflow-auto"
+        className="flex h-full grow flex-col overflow-hidden"
         onDrop={handleDrop}
       >
         {data.length === 0 && (
@@ -188,8 +188,10 @@ export const SidebarDataList: FC<SidebarDataListProps> = ({
         {(dataWithFolders.length > 0 || dataWithoutFolders.length > 0) && (
           <div
             className={`h-full ${
-              isOverflowing ? "w-[calc(100%-8px)]" : "w-full"
-            } space-y-4 pt-2 ${isOverflowing ? "mr-2" : ""}`}
+              isOverflowing
+                ? "flex w-[calc(100%-8px)] flex-col"
+                : "flex w-full flex-col"
+            } gap-2 ${isOverflowing ? "mr-2" : ""}`}
           >
             <FolderList contentType={contentType}>
               {folders.map(folder => (
@@ -214,10 +216,7 @@ export const SidebarDataList: FC<SidebarDataListProps> = ({
             </FolderList>
 
             <Collapsible
-              className={cn(
-                "flex grow flex-col gap-2",
-                isDragOver && "bg-accent"
-              )}
+              className={"flex grow flex-col gap-2 overflow-hidden"}
               open={isExpanded}
               onOpenChange={setIsExpanded}
               onDrop={handleDrop}
@@ -226,12 +225,8 @@ export const SidebarDataList: FC<SidebarDataListProps> = ({
               onDragOver={handleDragOver}
             >
               <CollapsibleTrigger asChild>
-                <div className="group inline-flex cursor-pointer items-start gap-2 self-stretch px-2 py-1.5">
-                  {isExpanded ? (
-                    <IconChevronDown stroke={3} />
-                  ) : (
-                    <IconChevronRight stroke={3} />
-                  )}
+                <div className="group inline-flex cursor-pointer items-center gap-2 self-stretch px-2 py-1.5">
+                  {isExpanded ? <IconChevronDown /> : <IconChevronRight />}
 
                   <div className="flex-1">
                     {contentType.charAt(0).toUpperCase() +
@@ -241,7 +236,13 @@ export const SidebarDataList: FC<SidebarDataListProps> = ({
                 </div>
               </CollapsibleTrigger>
 
-              <CollapsibleContent>
+              <CollapsibleContent
+                className={cn("overflow-auto", isDragOver && "bg-accent")}
+                onDrop={handleDrop}
+                onDragEnter={handleDragEnter}
+                onDragLeave={handleDragLeave}
+                onDragOver={handleDragOver}
+              >
                 {dataWithoutFolders.map(item => {
                   return (
                     <div
@@ -258,14 +259,6 @@ export const SidebarDataList: FC<SidebarDataListProps> = ({
           </div>
         )}
       </div>
-
-      <div
-        className={cn("flex grow", isDragOver && "bg-accent")}
-        onDrop={handleDrop}
-        onDragEnter={handleDragEnter}
-        onDragLeave={handleDragLeave}
-        onDragOver={handleDragOver}
-      ></div>
     </>
   )
 }

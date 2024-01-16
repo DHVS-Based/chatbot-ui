@@ -28,7 +28,7 @@ export const PresetItem: FC<PresetItemProps> = ({ preset }) => {
       item={preset}
       contentType="presets"
       icon={
-        <ModelIcon modelId={presetChatSettings.model} height={30} width={30} />
+        <ModelIcon modelId={presetChatSettings.model} height={24} width={24} />
       }
       updateState={{
         name,

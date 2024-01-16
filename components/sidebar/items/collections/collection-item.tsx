@@ -52,7 +52,7 @@ export const CollectionItem: FC<CollectionItemProps> = ({ collection }) => {
     <SidebarItem
       item={collection}
       contentType="collections"
-      icon={<IconBooks size={30} />}
+      icon={<IconBooks size={24} />}
       updateState={{
         image: selectedImage,
         collectionFilesToAdd: [],

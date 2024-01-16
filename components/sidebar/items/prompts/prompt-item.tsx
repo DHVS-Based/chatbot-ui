@@ -19,7 +19,7 @@ export const PromptItem: FC<PromptItemProps> = ({ prompt }) => {
     <SidebarItem
       item={prompt}
       contentType="prompts"
-      icon={<IconPencil size={30} />}
+      icon={<IconPencil size={24} />}
       updateState={{ name, content }}
       renderInputs={() => (
         <>

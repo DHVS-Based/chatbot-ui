@@ -24,12 +24,12 @@ export const FileItem: FC<FileItemProps> = ({ file }) => {
     <SidebarItem
       item={file}
       contentType="files"
-      icon={<FileIcon type={file.type} size={30} />}
+      icon={<FileIcon type={file.type} size={24} />}
       updateState={{ name }}
       renderInputs={() => (
         <>
           <div
-            className="cursor-pointer underline hover:opacity-50"
+            className="cursor-pointer underline hover:opacity-90"
             onClick={getLinkAndView}
           >
             View {file.name}

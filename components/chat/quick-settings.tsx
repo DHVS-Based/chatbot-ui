@@ -1,5 +1,4 @@
 import { ChatbotUIContext } from "@/context/context"
-import useHotkey from "@/lib/hooks/use-hotkey"
 import { Tables } from "@/supabase/types"
 import { LLMID } from "@/types"
 import { IconChevronDown, IconRobotFace } from "@tabler/icons-react"
@@ -18,8 +17,6 @@ import { QuickSettingOption } from "./quick-setting-option"
 interface QuickSettingsProps {}
 
 export const QuickSettings: FC<QuickSettingsProps> = ({}) => {
-  useHotkey("p", () => setIsOpen(prevState => !prevState))
-
   const {
     presets,
     assistants,
@@ -33,6 +30,7 @@ export const QuickSettings: FC<QuickSettingsProps> = ({}) => {
   } = useContext(ChatbotUIContext)
 
   const inputRef = useRef<HTMLInputElement>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
 
   const [isOpen, setIsOpen] = useState(false)
   const [search, setSearch] = useState("")
@@ -126,34 +124,49 @@ export const QuickSettings: FC<QuickSettingsProps> = ({}) => {
         setSearch("")
       }}
     >
-      <DropdownMenuTrigger className="max-w-[300px]" asChild>
-        <Button variant="ghost" className="flex space-x-3 text-xl">
-          {selectedPreset && (
-            <ModelIcon modelId={selectedPreset.model} width={32} height={32} />
-          )}
-
-          {selectedAssistant &&
-            (selectedAssistantImage ? (
-              <Image
-                className="rounded"
-                src={selectedAssistantImage}
-                alt="Assistant"
-                width={32}
-                height={32}
+      <DropdownMenuTrigger
+        className="bg-background w-full justify-start border-2 px-3 py-5"
+        asChild
+      >
+        <Button
+          ref={triggerRef}
+          className="flex items-center justify-between"
+          variant="ghost"
+        >
+          <div className="flex items-center gap-2">
+            {selectedPreset && (
+              <ModelIcon
+                modelId={selectedPreset.model}
+                width={26}
+                height={26}
               />
-            ) : (
-              <IconRobotFace
-                className="bg-primary text-secondary border-primary rounded border-[1px] p-1"
-                size={32}
-              />
-            ))}
+            )}
 
-          <div className="overflow-hidden text-ellipsis">
-            {isModified && (selectedPreset || selectedAssistant) && "Modified "}
+            {selectedAssistant &&
+              (selectedAssistantImage ? (
+                <Image
+                  className="rounded"
+                  src={selectedAssistantImage}
+                  alt="Assistant"
+                  width={32}
+                  height={32}
+                />
+              ) : (
+                <IconRobotFace
+                  className="bg-primary text-secondary border-primary rounded border-[1px] p-1"
+                  size={32}
+                />
+              ))}
 
-            {selectedPreset?.name ||
-              selectedAssistant?.name ||
-              "Quick Settings"}
+            <div className="overflow-hidden text-ellipsis">
+              {isModified &&
+                (selectedPreset || selectedAssistant) &&
+                "Modified "}
+
+              {selectedPreset?.name ||
+                selectedAssistant?.name ||
+                "Load a Preset"}
+            </div>
           </div>
 
           <IconChevronDown className="ml-1" />
@@ -161,7 +174,8 @@ export const QuickSettings: FC<QuickSettingsProps> = ({}) => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="min-w-[300px] max-w-[500px] space-y-4"
+        className="space-y-4"
+        style={{ width: triggerRef.current?.offsetWidth }}
         align="start"
       >
         {presets.length === 0 && assistants.length === 0 ? (

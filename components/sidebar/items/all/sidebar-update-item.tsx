@@ -45,6 +45,7 @@ import { uploadAssistantImage } from "@/db/storage/assistant-images"
 import { Tables, TablesUpdate } from "@/supabase/types"
 import { ContentType, DataItemType } from "@/types"
 import { FC, useContext, useEffect, useRef, useState } from "react"
+import { SidebarDeleteItem } from "./sidebar-delete-item"
 import { ScrollArea } from "@/components/ui/scroll-area"
 
 interface SidebarUpdateItemProps {
@@ -366,6 +367,8 @@ export const SidebarUpdateItem: FC<SidebarUpdateItemProps> = ({
         </ScrollArea>
 
         <DialogFooter className="mt-2 flex justify-between">
+          <SidebarDeleteItem item={item} contentType={contentType} />
+
           <div className="flex grow justify-end space-x-2">
             <Button variant="outline" onClick={() => setIsOpen(false)}>
               Cancel
