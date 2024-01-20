@@ -58,7 +58,7 @@ export const ChatSettings: FC<ChatSettingsProps> = ({}) => {
       </PopoverTrigger>
 
       <PopoverContent
-        className="bg-background border-input relative flex max-h-[calc(100vh-60px)] w-[300px] flex-col space-y-4 overflow-auto rounded-lg border-2 p-6 sm:w-[400px] md:w-[500px] lg:w-[600px] dark:border-none"
+        className="relative flex max-h-[calc(100vh-60px)] w-[300px] flex-col space-y-4 overflow-auto rounded-lg p-6 sm:w-[400px] md:w-[500px] lg:w-[600px]"
         align="center"
       >
         <ChatSettingsForm

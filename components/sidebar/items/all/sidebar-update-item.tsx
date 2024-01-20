@@ -370,7 +370,7 @@ export const SidebarUpdateItem: FC<SidebarUpdateItemProps> = ({
           <SidebarDeleteItem item={item} contentType={contentType} />
 
           <div className="flex grow justify-end space-x-2">
-            <Button variant="outline" onClick={() => setIsOpen(false)}>
+            <Button variant="ghost" onClick={() => setIsOpen(false)}>
               Cancel
             </Button>
 

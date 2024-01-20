@@ -104,7 +104,7 @@ export const WorkspaceSettings: FC<WorkspaceSettingsProps> = ({}) => {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <Button
-          className="flex-1 justify-start gap-2 truncate px-2 py-1.5 text-base font-normal"
+          className="flex-1 justify-start gap-2 truncate px-2 py-1.5 text-base font-normal hover:bg-slate-100/50 dark:hover:bg-slate-900/70"
           variant="ghost"
           onClick={() => setIsOpen(true)}
         >

@@ -174,7 +174,7 @@ export const SidebarDataList: FC<SidebarDataListProps> = ({
     <>
       <div
         ref={divRef}
-        className="flex h-full grow flex-col overflow-hidden"
+        className="flex grow flex-col overflow-hidden"
         onDrop={handleDrop}
       >
         {data.length === 0 && (
@@ -216,7 +216,7 @@ export const SidebarDataList: FC<SidebarDataListProps> = ({
             </FolderList>
 
             <Collapsible
-              className={"flex grow flex-col gap-2 overflow-hidden"}
+              className="flex flex-col gap-2 overflow-auto"
               open={isExpanded}
               onOpenChange={setIsExpanded}
               onDrop={handleDrop}
@@ -237,7 +237,10 @@ export const SidebarDataList: FC<SidebarDataListProps> = ({
               </CollapsibleTrigger>
 
               <CollapsibleContent
-                className={cn("overflow-auto", isDragOver && "bg-accent")}
+                className={cn(
+                  "flex grow flex-col self-stretch overflow-auto",
+                  isDragOver && "bg-accent"
+                )}
                 onDrop={handleDrop}
                 onDragEnter={handleDragEnter}
                 onDragLeave={handleDragLeave}

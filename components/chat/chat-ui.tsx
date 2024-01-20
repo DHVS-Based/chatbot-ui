@@ -209,14 +209,14 @@ export const ChatUI: FC<ChatUIProps> = ({}) => {
         <ChatSecondaryButtons />
       </div>
 
-      <div className="bg-secondary flex max-h-[50px] min-h-[50px] w-full items-center justify-center border-b-2 px-10 font-bold">
+      <div className="flex max-h-[50px] min-h-[50px] w-full items-center justify-center border-b border-slate-300 px-10 font-bold dark:border-slate-800">
         <div className="max-w-[300px] truncate sm:max-w-[400px] md:max-w-[500px] lg:max-w-[600px] xl:max-w-[700px]">
           {selectedChat?.name || "Chat"}
         </div>
       </div>
 
       <div
-        className="flex h-full w-full flex-col overflow-auto border-b"
+        className="flex h-full w-full flex-col overflow-auto"
         onScroll={handleScroll}
       >
         <div ref={messagesStartRef} />

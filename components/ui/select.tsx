@@ -5,6 +5,7 @@ import * as SelectPrimitive from "@radix-ui/react-select"
 import { Check, ChevronDown, ChevronUp } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { IconChevronDown } from "@tabler/icons-react"
 
 const Select = SelectPrimitive.Root
 
@@ -19,14 +20,14 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "border-input bg-background ring-offset-background placeholder:text-muted-foreground focus:ring-ring flex h-10 w-full items-center justify-between rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+      "ring-offset-background placeholder:text-muted-foreground focus:ring-ring flex h-10 w-full items-center justify-between rounded-md border-[1.5px] border-slate-300 bg-gray-50 bg-gradient-to-t from-slate-300/20 to-slate-300/0 px-3 py-2 text-sm hover:bg-gray-50/90 hover:bg-gradient-to-t hover:from-slate-300/10 hover:to-slate-300/0 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:bg-slate-900/50 dark:from-slate-800/20 dark:to-slate-800/0 dark:hover:bg-slate-900/50 dark:hover:from-slate-800/50 dark:hover:to-slate-800/0 [&>span]:line-clamp-1",
       className
     )}
     {...props}
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <ChevronDown className="h-4 w-4 opacity-50" />
+      <IconChevronDown />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ))

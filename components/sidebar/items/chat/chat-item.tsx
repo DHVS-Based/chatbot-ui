@@ -48,8 +48,8 @@ export const ChatItem: FC<ChatItemProps> = ({ chat }) => {
     <div
       ref={itemRef}
       className={cn(
-        "hover:bg-accent/50 focus:bg-accent flex w-full cursor-pointer items-center rounded-md p-2 focus:outline-none",
-        isActive && "bg-accent"
+        "flex w-full cursor-pointer items-center rounded-md p-2 hover:bg-slate-100/50 focus:outline-none dark:hover:bg-slate-900/70",
+        isActive && "bg-slate-100 dark:bg-slate-900"
       )}
       tabIndex={0}
       onKeyDown={handleKeyDown}

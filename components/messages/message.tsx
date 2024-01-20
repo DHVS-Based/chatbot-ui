@@ -118,7 +118,7 @@ export const Message: FC<MessageProps> = ({
     <div
       className={cn(
         "flex w-full justify-center",
-        message.role === "user" ? "" : "bg-secondary"
+        message.role === "user" ? "" : "bg-slate-100 dark:bg-slate-900/40"
       )}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
@@ -177,7 +177,7 @@ export const Message: FC<MessageProps> = ({
                 </Avatar>
               ) : (
                 <IconMoodSmile
-                  className="bg-primary text-secondary border-primary rounded border-[1px] p-1"
+                  className="text-secondary rounded border-[1px] bg-slate-800 p-1 dark:bg-slate-300"
                   size={ICON_SIZE}
                 />
               )}

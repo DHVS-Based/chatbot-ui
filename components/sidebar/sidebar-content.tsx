@@ -23,7 +23,7 @@ export const SidebarContent: FC<SidebarContentProps> = ({
   )
 
   return (
-    <div className="flex grow flex-col gap-4">
+    <div className="flex max-h-screen grow flex-col gap-4 overflow-hidden">
       <div>
         <SidebarSearch
           contentType={contentType}
@@ -37,6 +37,7 @@ export const SidebarContent: FC<SidebarContentProps> = ({
         data={filteredData}
         folders={folders}
       />
+
       <div className="flex items-center">
         <SidebarCreateButtons contentType={contentType} />
       </div>

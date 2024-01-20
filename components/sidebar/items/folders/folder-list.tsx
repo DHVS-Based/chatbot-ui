@@ -67,7 +67,7 @@ export const FolderList: FC<FolderListProps> = ({ contentType, children }) => {
         </div>
       </CollapsibleTrigger>
 
-      <CollapsibleContent className="flex max-h-60 flex-col gap-2 self-stretch overflow-auto">
+      <CollapsibleContent className="flex max-h-56 flex-col gap-2 self-stretch overflow-auto">
         {children}
       </CollapsibleContent>
     </Collapsible>

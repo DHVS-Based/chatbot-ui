@@ -84,8 +84,10 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({}) => {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
-        className="border-input flex h-[36px]
-        w-full cursor-pointer items-center justify-between rounded-md border px-2 py-1 hover:opacity-90"
+        className="flex h-[36px]
+        w-full cursor-pointer items-center justify-between rounded-md border-[1.5px] border-slate-300 bg-gray-50
+        bg-gradient-to-t from-slate-300/20 to-slate-300/0 px-2 py-1 hover:bg-gray-50/90 hover:from-slate-300/10 hover:to-slate-300/0
+        dark:border-slate-800 dark:bg-slate-900/50 dark:bg-gradient-to-t dark:from-slate-800/20 dark:to-slate-800/0 dark:hover:from-slate-800/50 dark:hover:to-slate-800/0"
         ref={triggerRef}
       >
         <div className="flex items-center gap-2 truncate">
@@ -110,16 +112,18 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({}) => {
       </PopoverTrigger>
 
       <PopoverContent
-        className="p-0"
-        style={{ width: triggerRef.current?.offsetWidth }}
+        className="border-[1.5px] bg-gray-50/80 bg-gradient-to-t from-slate-300/0 to-slate-300/20 p-0 shadow-lg backdrop-blur-xl dark:border-slate-800/60 dark:bg-slate-900/50 dark:bg-gradient-to-t dark:from-slate-800/10 dark:to-slate-800/0"
+        style={{
+          width: triggerRef.current?.offsetWidth
+        }}
       >
         <div className="flex flex-col self-stretch">
-          <div className="border-b p-1.5">
+          <div className="border-b border-slate-200 p-1.5 dark:border-slate-800/60">
             <div className="flex items-center gap-2 px-2">
               <IconSearch />
 
               <Input
-                className="border-none px-0 py-1.5 text-base font-normal"
+                className="border-none bg-inherit px-0 py-1.5 text-base font-normal placeholder:text-slate-400"
                 placeholder="Search workspaces..."
                 autoFocus
                 value={search}
@@ -128,13 +132,13 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({}) => {
             </div>
           </div>
 
-          <div className="flex flex-col border-b p-1.5">
+          <div className="flex flex-col border-b border-slate-200 p-1.5 dark:border-slate-800/60">
             {workspaces
               .filter(workspace => workspace.is_home)
               .map(workspace => (
                 <Button
                   key={workspace.id}
-                  className="flex items-center justify-start gap-2 px-2 py-1.5 text-base font-normal"
+                  className="flex items-center justify-start gap-2 px-2 py-1.5 text-base font-normal hover:bg-slate-100/50 dark:hover:bg-slate-900/70"
                   variant="ghost"
                   onClick={() => handleSelect(workspace.id)}
                 >
@@ -154,7 +158,7 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({}) => {
               .map(workspace => (
                 <Button
                   key={workspace.id}
-                  className="flex justify-start gap-2 truncate px-2 py-1.5 text-base font-normal"
+                  className="flex justify-start gap-2 truncate px-2 py-1.5 text-base font-normal hover:bg-slate-100/50 dark:hover:bg-slate-900/70"
                   variant="ghost"
                   onClick={() => handleSelect(workspace.id)}
                 >
@@ -169,13 +173,13 @@ export const WorkspaceSwitcher: FC<WorkspaceSwitcherProps> = ({}) => {
           </div>
         </div>
 
-        <div className="flex flex-col border-b p-1.5">
+        <div className="flex flex-col border-b border-slate-200 p-1.5 dark:border-slate-800/60">
           <WorkspaceSettings />
         </div>
 
-        <div className="flex flex-col border-b p-1.5">
+        <div className="flex flex-col p-1.5">
           <Button
-            className="flex w-full justify-start space-x-2 px-2 py-1.5 text-base font-normal"
+            className="flex w-full justify-start space-x-2 px-2 py-1.5 text-base font-normal hover:bg-slate-100/50 dark:hover:bg-slate-900/70"
             variant="ghost"
             onClick={handleCreateWorkspace}
           >

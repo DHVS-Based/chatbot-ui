@@ -125,7 +125,8 @@ export const QuickSettings: FC<QuickSettingsProps> = ({}) => {
       }}
     >
       <DropdownMenuTrigger
-        className="bg-background w-full justify-start border-2 px-3 py-5"
+        className="w-full justify-start border-[1.5px] border-slate-300 bg-gray-50 bg-gradient-to-t from-slate-300/20 to-slate-300/0 px-3 py-5 hover:bg-gray-50/90 hover:from-slate-300/10 hover:to-slate-300/0
+        dark:border-slate-800 dark:bg-slate-900/50 dark:bg-gradient-to-t dark:from-slate-800/20 dark:to-slate-800/0 dark:hover:from-slate-800/50 dark:hover:to-slate-800/0"
         asChild
       >
         <Button

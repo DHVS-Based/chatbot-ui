@@ -78,7 +78,7 @@ export const ChatInput: FC<ChatInputProps> = ({}) => {
     <>
       <ChatFilesDisplay />
 
-      <div className="border-input relative mt-3 flex min-h-[60px] w-full items-center justify-center rounded-xl border-2">
+      <div className="relative mt-3 flex min-h-[60px] w-full items-center justify-center rounded-xl border-2 border-slate-300 dark:border-slate-800">
         <div className="absolute bottom-[76px] left-0 max-h-[300px] w-full overflow-auto rounded-xl dark:border-none">
           <ChatCommandInput />
         </div>
@@ -124,7 +124,7 @@ export const ChatInput: FC<ChatInputProps> = ({}) => {
           ) : (
             <IconArrowUp
               className={cn(
-                "bg-primary text-secondary rounded p-1",
+                "text-slate'200 rounded p-1",
                 !userInput && "cursor-not-allowed opacity-10"
               )}
               onClick={() => {

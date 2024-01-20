@@ -111,7 +111,9 @@ export const Dashboard: FC<DashboardProps> = ({ children }) => {
       </Button>
 
       <div
-        className={cn("border-r-2 duration-200 dark:border-none")}
+        className={cn(
+          "border-r border-gray-300 duration-200 dark:border-slate-800"
+        )}
         style={{
           // Sidebar
           minWidth: showSidebar ? `${SIDEBAR_WIDTH}px` : "0px",
@@ -136,7 +138,7 @@ export const Dashboard: FC<DashboardProps> = ({ children }) => {
       </div>
 
       <div
-        className="bg-muted/50 flex grow flex-col"
+        className="bg-background flex grow flex-col"
         onDrop={onFileDrop}
         onDragOver={onDragOver}
         onDragEnter={handleDragEnter}
